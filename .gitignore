@@ -9,6 +9,7 @@ __pycache__/
 # Distribution / packaging
 node_modules/
 .Python
+.serverless
 build/
 develop-eggs/
 dist/

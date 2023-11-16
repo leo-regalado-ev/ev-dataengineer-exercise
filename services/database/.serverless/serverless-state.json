@@ -72,7 +72,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "datalearning-leo-serverless-bucket-r49kk8p9tv",
-                "S3Key": "serverless/database/dev/1700136399896-2023-11-16T12:06:39.896Z/database.zip"
+                "S3Key": "serverless/database/dev/1700138484656-2023-11-16T12:41:24.656Z/database.zip"
               },
               "Handler": "migrate.handler",
               "Runtime": "python3.9",
@@ -159,7 +159,7 @@
         "artifactsS3KeyDirname": "serverless/database/dev/code-artifacts",
         "deploymentBucket": "datalearning-leo-serverless-bucket-r49kk8p9tv",
         "artifact": "/Users/leon/dev/Repositories/ev-dataengineer-exercise/services/database/.serverless/database.zip",
-        "artifactDirectoryName": "serverless/database/dev/1700136399896-2023-11-16T12:06:39.896Z"
+        "artifactDirectoryName": "serverless/database/dev/1700138484656-2023-11-16T12:41:24.656Z"
       },
       "functions": {
         "$ref": "$[\"service\"][\"functions\"]"
@@ -170,7 +170,7 @@
     "artifact": "/Users/leon/dev/Repositories/ev-dataengineer-exercise/services/database/.serverless/database.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/database/dev/1700136399896-2023-11-16T12:06:39.896Z",
+    "artifactDirectoryName": "serverless/database/dev/1700138484656-2023-11-16T12:41:24.656Z",
     "artifact": "database.zip"
   }
 }

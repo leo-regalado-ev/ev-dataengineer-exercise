@@ -1,0 +1,41 @@
+service: people
+
+provider:
+  name: aws
+  runtime: python3.9
+  profile: ${file(../../config.yml):AWS_PROFILE}
+  region: ap-southeast-2
+  memorySize: 512
+  timeout: 900
+  stage: ${opt:stage, 'dev'}
+  versionFunctions: ${file(../../config.yml):VERSION_FUNCTIONS}
+  stackName: ${file(../../config.yml):STACKNAME}
+  environment: ${file(../../config.yml):ENVIRONMENT}
+  apiGateway: ${file(../../config.yml):APIGATEWAY}
+  vpc: ${file(../../config.yml):VPC}
+  stackTags: ${file(../../config.yml):TAGS}
+  tags: ${file(../../config.yml):TAGS}
+  logRetentionInDays: ${file(../../config.yml):LOG_RETENTION.days}
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - 's3:*'
+      Resource: '*'
+  deploymentBucket:
+    name: ${file(../../config.yml):S3.SERVERLESS_BUCKET}
+    serverSideEncryption: AES256
+    tags: ${file(../../config.yml):TAGS}
+
+custom:
+  pythonRequirements:
+    fileName: ./requirements.txt
+
+plugins:
+  - serverless-python-requirements
+package:
+  include: ${file(../../config.yml):PACKAGE_INCLUDE}
+
+functions:
+  migrate-data:
+    handler: migrate_data.handler
+    role: ${file(../../config.yml):ROLE.LAMBDA_ROLE}
