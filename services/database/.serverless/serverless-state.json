@@ -1,0 +1,176 @@
+{
+  "service": {
+    "service": "database",
+    "serviceObject": {
+      "name": "database"
+    },
+    "provider": {
+      "name": "aws",
+      "runtime": "python3.9",
+      "profile": "default",
+      "region": "ap-southeast-2",
+      "memorySize": 128,
+      "timeout": 29,
+      "stage": "dev",
+      "versionFunctions": false,
+      "stackName": "database-dev",
+      "environment": {
+        "STAGE": "dev",
+        "AWS_CONFIG_REGION": "ap-southeast-2",
+        "S3_BUCKET": "datalearning-leo-roj4wrijy8"
+      },
+      "apiGateway": {
+        "restApiId": "cltru30pf2",
+        "restApiRootResourceId": "hxdsrau79c"
+      },
+      "vpc": {
+        "securityGroupIds": [
+          "sg-07ae0e63b776b22cc"
+        ],
+        "subnetIds": [
+          "subnet-0e449ea3d4477ea22",
+          "subnet-04683e678be75c484"
+        ]
+      },
+      "stackTags": {
+        "project": "dataengineering-leo"
+      },
+      "tags": {
+        "project": "dataengineering-leo"
+      },
+      "logRetentionInDays": 30,
+      "iamRoleStatements": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "s3:*"
+          ],
+          "Resource": "*"
+        }
+      ],
+      "deploymentBucket": "datalearning-leo-serverless-bucket-r49kk8p9tv",
+      "deploymentBucketObject": {
+        "name": "datalearning-leo-serverless-bucket-r49kk8p9tv",
+        "serverSideEncryption": "AES256",
+        "tags": {
+          "project": "dataengineering-leo"
+        }
+      },
+      "compiledCloudFormationTemplate": {
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "The AWS CloudFormation template for this Serverless application",
+        "Resources": {
+          "MigrateDashtablesLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/database-dev-migrate-tables",
+              "RetentionInDays": 30
+            }
+          },
+          "MigrateDashtablesLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "datalearning-leo-serverless-bucket-r49kk8p9tv",
+                "S3Key": "serverless/database/dev/1700136399896-2023-11-16T12:06:39.896Z/database.zip"
+              },
+              "Handler": "migrate.handler",
+              "Runtime": "python3.9",
+              "FunctionName": "database-dev-migrate-tables",
+              "MemorySize": 128,
+              "Timeout": 29,
+              "Tags": [
+                {
+                  "Key": "project",
+                  "Value": "dataengineering-leo"
+                }
+              ],
+              "Environment": {
+                "Variables": {
+                  "STAGE": "dev",
+                  "AWS_CONFIG_REGION": "ap-southeast-2",
+                  "S3_BUCKET": "datalearning-leo-roj4wrijy8"
+                }
+              },
+              "Role": "arn:aws:iam::137484672202:role/LambdaRole",
+              "VpcConfig": {
+                "SecurityGroupIds": {
+                  "$ref": "$[\"service\"][\"provider\"][\"vpc\"][\"securityGroupIds\"]"
+                },
+                "SubnetIds": {
+                  "$ref": "$[\"service\"][\"provider\"][\"vpc\"][\"subnetIds\"]"
+                }
+              }
+            },
+            "DependsOn": [
+              "MigrateDashtablesLogGroup"
+            ]
+          }
+        },
+        "Outputs": {
+          "ServerlessDeploymentBucketName": {
+            "Value": "datalearning-leo-serverless-bucket-r49kk8p9tv",
+            "Export": {
+              "Name": "sls-database-dev-ServerlessDeploymentBucketName"
+            }
+          }
+        }
+      }
+    },
+    "custom": {
+      "pythonRequirements": {
+        "fileName": "./requirements.txt"
+      }
+    },
+    "plugins": [
+      "serverless-python-requirements"
+    ],
+    "pluginsData": {},
+    "functions": {
+      "migrate-tables": {
+        "handler": "migrate.handler",
+        "role": "arn:aws:iam::137484672202:role/LambdaRole",
+        "events": [],
+        "name": "database-dev-migrate-tables",
+        "package": {},
+        "memory": 128,
+        "timeout": 29,
+        "runtime": "python3.9",
+        "vpc": {}
+      }
+    },
+    "configValidationMode": "warn",
+    "serviceFilename": "serverless.yml",
+    "initialServerlessConfig": {
+      "service": "database",
+      "provider": {
+        "$ref": "$[\"service\"][\"provider\"]"
+      },
+      "custom": {
+        "$ref": "$[\"service\"][\"custom\"]"
+      },
+      "plugins": {
+        "$ref": "$[\"service\"][\"plugins\"]"
+      },
+      "package": {
+        "include": [
+          "../../utilities/**"
+        ],
+        "artifactsS3KeyDirname": "serverless/database/dev/code-artifacts",
+        "deploymentBucket": "datalearning-leo-serverless-bucket-r49kk8p9tv",
+        "artifact": "/Users/leon/dev/Repositories/ev-dataengineer-exercise/services/database/.serverless/database.zip",
+        "artifactDirectoryName": "serverless/database/dev/1700136399896-2023-11-16T12:06:39.896Z"
+      },
+      "functions": {
+        "$ref": "$[\"service\"][\"functions\"]"
+      }
+    },
+    "layers": {},
+    "isDashboardMonitoringPreconfigured": false,
+    "artifact": "/Users/leon/dev/Repositories/ev-dataengineer-exercise/services/database/.serverless/database.zip"
+  },
+  "package": {
+    "artifactDirectoryName": "serverless/database/dev/1700136399896-2023-11-16T12:06:39.896Z",
+    "artifact": "database.zip"
+  }
+}

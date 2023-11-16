@@ -1,0 +1,61 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "The AWS CloudFormation template for this Serverless application",
+  "Resources": {
+    "MigrateDashtablesLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/database-dev-migrate-tables",
+        "RetentionInDays": 30
+      }
+    },
+    "MigrateDashtablesLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "datalearning-leo-serverless-bucket-r49kk8p9tv",
+          "S3Key": "serverless/database/dev/1700136399896-2023-11-16T12:06:39.896Z/database.zip"
+        },
+        "Handler": "migrate.handler",
+        "Runtime": "python3.9",
+        "FunctionName": "database-dev-migrate-tables",
+        "MemorySize": 128,
+        "Timeout": 29,
+        "Tags": [
+          {
+            "Key": "project",
+            "Value": "dataengineering-leo"
+          }
+        ],
+        "Environment": {
+          "Variables": {
+            "STAGE": "dev",
+            "AWS_CONFIG_REGION": "ap-southeast-2",
+            "S3_BUCKET": "datalearning-leo-roj4wrijy8"
+          }
+        },
+        "Role": "arn:aws:iam::137484672202:role/LambdaRole",
+        "VpcConfig": {
+          "SecurityGroupIds": [
+            "sg-07ae0e63b776b22cc"
+          ],
+          "SubnetIds": [
+            "subnet-0e449ea3d4477ea22",
+            "subnet-04683e678be75c484"
+          ]
+        }
+      },
+      "DependsOn": [
+        "MigrateDashtablesLogGroup"
+      ]
+    }
+  },
+  "Outputs": {
+    "ServerlessDeploymentBucketName": {
+      "Value": "datalearning-leo-serverless-bucket-r49kk8p9tv",
+      "Export": {
+        "Name": "sls-database-dev-ServerlessDeploymentBucketName"
+      }
+    }
+  }
+}

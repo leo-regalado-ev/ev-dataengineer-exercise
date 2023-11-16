@@ -1,0 +1,61 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "The AWS CloudFormation template for this Serverless application",
+  "Resources": {
+    "MigrateDashdataLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/food-price-index-dev-migrate-data",
+        "RetentionInDays": 30
+      }
+    },
+    "MigrateDashdataLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "datalearning-leo-serverless-bucket-r49kk8p9tv",
+          "S3Key": "serverless/food-price-index/dev/1700136725874-2023-11-16T12:12:05.874Z/food-price-index.zip"
+        },
+        "Handler": "migrate_data.handler",
+        "Runtime": "python3.9",
+        "FunctionName": "food-price-index-dev-migrate-data",
+        "MemorySize": 128,
+        "Timeout": 29,
+        "Tags": [
+          {
+            "Key": "project",
+            "Value": "dataengineering-leo"
+          }
+        ],
+        "Environment": {
+          "Variables": {
+            "STAGE": "dev",
+            "AWS_CONFIG_REGION": "ap-southeast-2",
+            "S3_BUCKET": "datalearning-leo-roj4wrijy8"
+          }
+        },
+        "Role": "arn:aws:iam::137484672202:role/LambdaRole",
+        "VpcConfig": {
+          "SecurityGroupIds": [
+            "sg-07ae0e63b776b22cc"
+          ],
+          "SubnetIds": [
+            "subnet-0e449ea3d4477ea22",
+            "subnet-04683e678be75c484"
+          ]
+        }
+      },
+      "DependsOn": [
+        "MigrateDashdataLogGroup"
+      ]
+    }
+  },
+  "Outputs": {
+    "ServerlessDeploymentBucketName": {
+      "Value": "datalearning-leo-serverless-bucket-r49kk8p9tv",
+      "Export": {
+        "Name": "sls-food-price-index-dev-ServerlessDeploymentBucketName"
+      }
+    }
+  }
+}

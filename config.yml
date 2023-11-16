@@ -1,0 +1,48 @@
+APIGATEWAY: 
+  restApiId: cltru30pf2
+  restApiRootResourceId: hxdsrau79c
+
+STACKNAME: ${self:service}-${self:provider.stage}
+
+AWS_PROFILE: default
+
+VPC:
+  securityGroupIds:
+    - sg-07ae0e63b776b22cc
+  subnetIds:
+    - subnet-0e449ea3d4477ea22
+    - subnet-04683e678be75c484
+
+TAGS:
+  project: dataengineering-leo
+
+ENVIRONMENT:
+  STAGE: dev
+  AWS_CONFIG_REGION: ap-southeast-2
+  S3_BUCKET: datalearning-leo-roj4wrijy8
+
+REQUEST_HEADERS:
+  - Content-Type
+  - X-Amz-Date
+  - Authorization
+  - X-Api-Key
+  - X-Amz-Security-Token
+  - X-Amz-User-Agent
+
+S3:
+  SERVERLESS_BUCKET: datalearning-leo-serverless-bucket-r49kk8p9tv
+
+ROLE:
+  LAMBDA_ROLE: arn:aws:iam::137484672202:role/LambdaRole
+
+LOG_RETENTION:
+  days: 30
+
+PRUNE:
+  automatic: false
+  number: 1
+
+VERSION_FUNCTIONS: false
+
+PACKAGE_INCLUDE:
+  - ../../utilities/**
