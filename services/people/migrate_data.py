@@ -39,7 +39,7 @@ def handler(event, context):
                 first_row = False
                 continue
 
-            if len(row) != 8:
+            if len(row) != 9:
                 continue
 
             # Append row data as tuple, with correct order to use in query

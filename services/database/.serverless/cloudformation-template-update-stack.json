@@ -14,7 +14,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "datalearning-leo-serverless-bucket-r49kk8p9tv",
-          "S3Key": "serverless/database/dev/1700138484656-2023-11-16T12:41:24.656Z/database.zip"
+          "S3Key": "serverless/database/dev/1700141210815-2023-11-16T13:26:50.815Z/database.zip"
         },
         "Handler": "migrate.handler",
         "Runtime": "python3.9",

@@ -28,16 +28,16 @@ class Scripts():
     """
 
     INSERT_DATA = """
-    INSERT INTO table
+    INSERT INTO people
     (
-        series_reference,
-        period,
-        data_value,
-        status,
-        units,
-        subject,
-        "group",
-        series_title_1
+        user_id,
+        first_name,
+        last_name,
+        sex,
+        email,
+        phone,
+        date_of_birth,
+        job_title
     )
     VALUES %s
     """

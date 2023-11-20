@@ -40,13 +40,13 @@ class Scripts():
     """
 
     CREATE_PEOPLE_TABLE = """
-    CREATE TABLE IF NOT EXISTS food_price_index (
+    CREATE TABLE IF NOT EXISTS people (
         id SERIAL PRIMARY KEY,
         user_id VARCHAR(128) UNIQUE NOT NULL,
-        first_name VARCHAR(20),
-        last_name INTEGER,
+        first_name VARCHAR(255),
+        last_name VARCHAR(255),
         sex VARCHAR(64),
-        email VARCHAR(64),
+        email VARCHAR(255),
         phone VARCHAR(255),
         date_of_birth DATE,
         job_title VARCHAR(255),
