@@ -1,4 +1,5 @@
 import psycopg2
+import os
 
 
 def get_database_connection():
@@ -7,9 +8,9 @@ def get_database_connection():
     """
     return psycopg2.connect(
         database="postgres",
-        host="database-1.chz8io3pekiy.ap-southeast-2.rds.amazonaws.com",
-        user="postgres",
-        password="sEppet-feqcis-gozvi7",
+        host=os.environ.get("DB_HOST"),
+        user=os.environ.get("DB_USER"),
+        password=os.environ.get("DB_PASS"),
         port=5432
     )
 

@@ -20,6 +20,9 @@ ENVIRONMENT:
   STAGE: dev
   AWS_CONFIG_REGION: ap-southeast-2
   S3_BUCKET: datalearning-leo-roj4wrijy8
+  DB_HOST: ${ssm:/evlearning-leo/db/host}
+  DB_USER: ${ssm:/evlearning-leo/db/username}
+  DB_PASS: ${ssm:/evlearning-leo/db/password}
 
 REQUEST_HEADERS:
   - Content-Type
